@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.1.1/dist/yeti/bootstrap.css">
+	<link rel="manifest" href="/manifest/manifest.json">
+
+	<title>VIN Decoder</title>
+</head>
+
+<body>
+	<header class="mb-4">
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="container">
+				<span class="navbar-brand">VIN Decoder</a>
+			</div>
+		</nav>
+	</header>
+	<main id="DecoderApp">
+		<div class="container">
+			<form>
+				<div class="form-group">
+					<label for="rVIN">VIN</label>
+					<div class="input-group">
+						<input id="rVIN" v-model="rVIN" class="form-control" placeholder="Enter a VIN">
+						<div class="input-group-append">
+							<button v-on:click.prevent="decodeVIN" class="btn btn-primary">Decode</button>
+						</div>
+					</div>
+				</div>
+			</form>
+			<table class="table table-striped">
+				<tr v-for="(obj) in Bundle.decoderData" v-if="obj.Value">
+					<td>{{ obj.Variable }}</td>
+					<td>{{ obj.Value }}</td>
+				</tr>
+			</table>
+		</div>
+	</main>
+	<footer></footer>
+
+	<script src="https://cdn.jsdelivr.net/npm/workbox-sw@3.2.0/build/workbox-sw.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.3/dist/umd/popper.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/js/bootstrap.min.js"></script>
+	<script>
+		(function () {
+			if ("serviceWorker" in navigator) {
+				// Use the window load event to keep the page load performant
+				window.addEventListener("load", () => {
+					navigator.serviceWorker.register("/serviceworker.js");
+				});
+			}
+		})();
+		(function () {
+			let DOM = {},
+				Bundle = {},
+				App = {};
+
+			Bundle.decoderData = [{
+				Value: "",
+				ValueId: "",
+				Variable: "",
+				VariableId: 0
+			}];
+
+			function decodeVIN() {
+				jQuery.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevinextended/${this.rVIN}?format=json`)
+					.then(function (data) {
+						Bundle.decoderData = data.Results;
+					});
+			}
+
+			jQuery(document).ready(function () {
+				App.decoderApp = new Vue({
+					el: "#DecoderApp",
+					data: {
+						Bundle: Bundle,
+						rVIN: "1FDXK84A5JVA21968"
+					},
+					methods: {
+						decodeVIN: decodeVIN
+					}
+				});
+			});
+		})();
+	</script>
+</body>
+
+</html>
