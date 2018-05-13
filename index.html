@@ -24,17 +24,28 @@
 			<form>
 				<div class="form-group mb-4">
 					<div class="input-group">
-						<input id="rVIN" v-model="rVIN" class="form-control" placeholder="Enter a VIN">
+						<div class="input-group-prepend">
+							<span class="input-group-text" style="width: 40px;">{{ inputVIN.length }}</span>
+						</div>
+						<input id="inputVIN" class="form-control" placeholder="Enter a VIN" maxlength="17" autofocus
+							v-bind:value="inputVIN.toUpperCase()"
+							v-on:input="inputVIN = fixInput($event)"
+							v-on:focus="$event.target.select()"
+							v-on:keypress="filterInput(event)">
 						<div class="input-group-append">
-							<button v-on:click.prevent="decodeVIN" class="btn btn-primary">Decode</button>
+							<button class="btn btn-primary" v-on:click.prevent="decodeVIN">Decode</button>
 						</div>
 					</div>
+					<small class="form-text text-muted">{{ inputMessage }}</small>
 				</div>
 			</form>
+			<div class="alert alert-warning mb-4" v-show="errorMessage">
+				<strong>Warning!</strong> {{ errorMessage }}
+			</div>
 			<table class="table table-striped">
-				<tr v-for="(obj) in Bundle.decoderData" v-if="obj.Value">
-					<td>{{ obj.Variable }}</td>
-					<td>{{ obj.Value }}</td>
+				<tr v-for="(obj) in decoderData">
+					<td>{{ obj.key }}</td>
+					<td>{{ obj.value }}</td>
 				</tr>
 			</table>
 		</div>
@@ -53,37 +64,166 @@
 					navigator.serviceWorker.register("/serviceworker.js");
 				});
 			}
-		})();
-		(function () {
-			let DOM = {},
-				Bundle = {},
-				App = {};
 
-			Bundle.decoderData = [{
-				Value: "",
-				ValueId: "",
-				Variable: "",
-				VariableId: 0
-			}];
+			function fixEngineBlock(blockType) {
+				if (blockType.replace(" ", "-") === "In-Line") return "L";
+				if (blockType.replace(" ", "-") === "V-Shaped") return "V";
+				if (blockType.replace(" ", "-") === "W-Shaped") return "W";
 
-			function decodeVIN() {
-				jQuery.get(`https://vpic.nhtsa.dot.gov/api/vehicles/decodevinextended/${this.rVIN}?format=json`)
-					.then(function (data) {
-						Bundle.decoderData = data.Results;
-					});
+				return "Cyl-";
 			}
 
-			jQuery(document).ready(function () {
-				App.decoderApp = new Vue({
-					el: "#DecoderApp",
-					data: {
-						Bundle: Bundle,
-						rVIN: "1FDXK84A5JVA21968"
-					},
-					methods: {
-						decodeVIN: decodeVIN
+			function composeBodyData(decodedVIN) {
+				let body = [];
+
+				if (decodedVIN.Doors) body.push(decodedVIN.Doors + " Door ");
+				if (decodedVIN.BodyClass) body.push(decodedVIN.BodyClass);
+
+				return body.join("").trim();
+			}
+
+			function composeEngineData(decodedVIN) {
+				let engine = [];
+
+				if (decodedVIN.EngineCylinders) engine.push(fixEngineBlock(decodedVIN.EngineConfiguration) + decodedVIN.EngineCylinders);
+
+				if (decodedVIN.VehicleType.toLowerCase().indexOf("motorcycle") > -1) {
+					// compose engine data for motorcycles
+					if (decodedVIN.DisplacementCC) engine.push(decodedVIN.DisplacementCC + " CC");
+				} else {
+					// compose engine data for standard vehicles
+					if (decodedVIN.DisplacementL) {
+						let displacement = parseFloat(decodedVIN.DisplacementL).toFixed(1).toString() + "L";
+
+						if (decodedVIN.DisplacementCI) displacement += " (" + parseInt(decodedVIN.DisplacementCI).toString() + " CI)";
+
+						engine.push(displacement);
 					}
+					if (decodedVIN.FuelInjectionType) {
+						if (decodedVIN.FuelInjectionType.toLowerCase().indexOf("injection") > -1) engine.push("EFI");
+					}
+					if (decodedVIN.Turbo) engine.push("Turbo");
+					if (decodedVIN.ValveTrainDesign) {
+						if (decodedVIN.ValveTrainDesign.toUpperCase().indexOf("SOHC") > -1) engine.push("SOHC");
+						if (decodedVIN.ValveTrainDesign.toUpperCase().indexOf("DOHC") > -1) engine.push("DOHC");
+					}
+				}
+
+				return engine.join("; ").trim();
+			}
+
+			function composeTransmissionData(decodedVIN) {
+				let transmission = [];
+
+				if (decodedVIN.TransmissionSpeeds) transmission.push(decodedVIN.TransmissionSpeeds + " speed ");
+				if (decodedVIN.TransmissionStyle) transmission.push(decodedVIN.TransmissionStyle);
+
+				return transmission.join("").trim();
+			}
+
+			function composePlantData(decodedVIN) {
+				let plant = [];
+
+				if (decodedVIN.PlantCity) plant.push(decodedVIN.PlantCity);
+				if (decodedVIN.PlantState) plant.push(decodedVIN.PlantState);
+				if (decodedVIN.PlantCountry) plant.push(decodedVIN.PlantCountry);
+
+				return plant.join(", ").trim();
+			}
+
+			function composeDecodedVIN(decodedVIN) {
+				let rawResults = {
+					Year: decodedVIN.ModelYear,
+					Make: decodedVIN.Make,
+					Model: decodedVIN.Model,
+					Trim: decodedVIN.Trim,
+					Series: decodedVIN.Series,
+					"Body type": composeBodyData(decodedVIN),
+					Driveline: decodedVIN.DriveType,
+					Engine: composeEngineData(decodedVIN),
+					Fuel: decodedVIN.FuelTypePrimary,
+					Transmission: composeTransmissionData(decodedVIN),
+					"Vehicle type": decodedVIN.VehicleType,
+					Weight: decodedVIN.GVWR,
+					Manufacturer: decodedVIN.Manufacturer,
+					Plant: composePlantData(decodedVIN)
+				};
+
+				let composedVIN = [];
+
+				Object.keys(rawResults).forEach(function (key) {
+					composedVIN.push({
+						key: key,
+						value: rawResults[key]
+					});
 				});
+
+				return composedVIN;
+			}
+
+			new Vue({
+				el: "#DecoderApp",
+				data: {
+					inputVIN: "",
+					inputMessage: "",
+					errorMessage: "",
+					decoderData: []
+				},
+				methods: {
+					fixInput: function (event) {
+						return event.target.value
+							.toUpperCase()
+							.replace("O", "0")
+							.replace("Q", "0")
+							.replace("I", "1");
+					},
+					filterInput: function (event) {
+						// allow return key to submit form
+						if (event.which === 13) return true;
+
+						let input = String.fromCharCode(event.which);
+
+						if (/[A-Z0-9]/ig.test(input)) return true;
+
+						this.inputMessage = "That character is not allowed";
+
+						event.preventDefault()
+					},
+					decodeVIN: function () {
+						let self = this;
+
+						if (self.inputVIN.length !== 17) {
+							self.inputMessage = "VIN must be 17 characters";
+							return;
+						}
+
+						jQuery.get("https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/" + self.inputVIN +
+								"?format=json")
+							.then(function (data) {
+								self.decoderData = [];
+								self.inputMessage = "";
+								self.errorMessage = "";
+
+								if (!data || !data.Results || !data.Results.length) {
+									self.inputMessage = "No results were found...";
+
+									return;
+								}
+
+								self.inputMessage = data.Message;
+
+								if (data.Count > 0) {
+									let decodedVIN = data.Results[0];
+
+									if (decodedVIN.ErrorCode.charAt(0) !== "0") {
+										self.errorMessage = decodedVIN.ErrorCode.substring(4);
+										if (decodedVIN.SuggestedVIN) self.errorMessage += " Suggested VIN: " + decodedVIN.SuggestedVIN;
+									}
+									self.decoderData = composeDecodedVIN(decodedVIN);
+								}
+							});
+					}
+				}
 			});
 		})();
 	</script>
