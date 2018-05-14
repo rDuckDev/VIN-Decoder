@@ -101,8 +101,10 @@
 					}
 					if (decodedVIN.FuelInjectionType) {
 						if (decodedVIN.FuelInjectionType.toLowerCase().indexOf("injection") > -1) engine.push("EFI");
+						if (decodedVIN.FuelInjectionType.toLowerCase().indexOf("carburet") > -1) engine.push("Carb");
 					}
-					if (decodedVIN.Turbo) engine.push("Turbo");
+					if (decodedVIN.Turbo.toLowerCase().indexOf("yes") > -1) engine.push("Turbo");
+					if (decodedVIN.OtherEngineInfo.toLowerCase().indexOf("supercharge") > -1) engine.push("Supercharged");
 					if (decodedVIN.ValveTrainDesign) {
 						if (decodedVIN.ValveTrainDesign.toUpperCase().indexOf("SOHC") > -1) engine.push("SOHC");
 						if (decodedVIN.ValveTrainDesign.toUpperCase().indexOf("DOHC") > -1) engine.push("DOHC");
