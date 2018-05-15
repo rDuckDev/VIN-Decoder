@@ -1,6 +1,6 @@
 {
 	"name": "VIN Decoder",
-	"short_name": "VIN Info",
+	"short_name": "Decode",
 	"theme_color": "#222222",
 	"background_color": "#222222",
 	"display": "standalone",
