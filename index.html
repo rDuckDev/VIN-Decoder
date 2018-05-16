@@ -32,7 +32,7 @@
 						</div>
 						<input id="inputVIN" class="form-control" placeholder="Enter a VIN" maxlength="17" autofocus
 							v-bind:value="inputVIN.toUpperCase()"
-							v-on:input="inputVIN = fixInput($event)"
+							v-on:input="inputVIN = fixInput(event)"
 							v-on:focus="$event.target.select()"
 							v-on:keypress="filterInput(event)">
 						<div class="input-group-append">
