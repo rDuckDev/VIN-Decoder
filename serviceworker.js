@@ -7,8 +7,8 @@ workbox.core.setCacheNameDetails({
 	runtime: "cache"
 });
 
-workbox.precaching.precacheAndRoute([
-	"./offline/decode.json"
+workbox.precaching.precache([
+	"/offline/decode.json"
 ]);
 
 workbox.routing.registerRoute(
