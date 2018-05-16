@@ -2,9 +2,7 @@ importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.2.0/workbox
 
 workbox.core.setCacheNameDetails({
 	prefix: "vin-decoder",
-	suffix: "v1",
-	precache: "cache",
-	runtime: "cache"
+	suffix: "v1"
 });
 
 workbox.precaching.precache([
