@@ -12,10 +12,9 @@ workbox.precaching.precacheAndRoute([
 	"./offline/decode.json"
 ]);
 
-// cache HTML for offline use
 workbox.routing.registerRoute(
-	/(\/|\.html|\.htm)$/,
-	workbox.strategies.networkFirst(),
+	/.*(\/|\.htm|\.html)$/i,
+	workbox.strategies.networkFirst()
 );
 
 // cache static content like JS and CSS for faster (or offline) use
