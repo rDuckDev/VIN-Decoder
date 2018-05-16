@@ -61,39 +61,3 @@ workbox.routing.registerRoute(
 			});
 	}
 );
-
-workbox.routing.registerRoute(
-	"https://cdn.jsdelivr.net/npm/bootswatch@4.1.1/dist/yeti/bootstrap.css",
-	function (event) {
-		console.log(event);
-		let routeHandler = workbox.strategies.cacheFirst();
-
-		let response = new Response(event.url.href.replace("yeti", getTheme()));
-
-		routeHandler.handle(response);
-	}
-);
-
-function getTheme() {
-	var userAgent = navigator.userAgent;
-
-	if (userAgent.indexOf("Mac OS") > -1 ||
-		userAgent.indexOf("Macintosh") > -1 ||
-		userAgent.indexOf("iPad") > -1 ||
-		userAgent.indexOf("iPhone") > -1) {
-		// Mac OS or iOS
-		return "litera";
-	} else if (userAgent.indexOf("Windows") > -1) {
-		// Windows
-		return "cosmo";
-	} else if (userAgent.indexOf("Android") > -1) {
-		// Android
-		return "materia";
-	} else if (userAgent.indexOf("Linux") > -1) {
-		// Linux
-		return "united";
-	}
-
-	// default theme
-	return "yeti";
-}
