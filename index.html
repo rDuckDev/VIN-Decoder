@@ -115,6 +115,15 @@
 				return engine.join("; ").trim();
 			}
 
+			function composeFuelData(decodedVIN) {
+				let fuel = [];
+
+				if (decodedVIN.FuelTypePrimary) fuel.push(decodedVIN.FuelTypePrimary);
+				if (decodedVIN.FuelTypeSecondary) fuel.push(decodedVIN.FuelTypeSecondary);
+
+				return fuel.join("; ");
+			}
+
 			function composeTransmissionData(decodedVIN) {
 				let transmission = [];
 
@@ -144,7 +153,7 @@
 					"Body type": composeBodyData(decodedVIN),
 					Driveline: decodedVIN.DriveType,
 					Engine: composeEngineData(decodedVIN),
-					Fuel: decodedVIN.FuelTypePrimary,
+					Fuel: composeFuelData(decodedVIN),
 					Transmission: composeTransmissionData(decodedVIN),
 					"Vehicle type": decodedVIN.VehicleType,
 					Weight: decodedVIN.GVWR,
