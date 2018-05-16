@@ -103,7 +103,13 @@
 						engine.push(displacement);
 					}
 					if (decodedVIN.FuelInjectionType) {
-						if (decodedVIN.FuelInjectionType.toLowerCase().indexOf("injection") > -1) engine.push("EFI");
+						if (decodedVIN.FuelInjectionType.indexOf("(") > -1) {
+							let startIndex = decodedVIN.FuelInjectionType.indexOf("(") + 1,
+								finishIndex = decodedVIN.FuelInjectionType.indexOf(")"),
+								injectionType = decodedVIN.FuelInjectionType.substring(startIndex, finishIndex);
+
+							engine.push(injectionType);
+						}
 						if (decodedVIN.FuelInjectionType.toLowerCase().indexOf("carburet") > -1) engine.push("Carb");
 					}
 					if (decodedVIN.Turbo.toLowerCase().indexOf("yes") > -1) engine.push("Turbo");
