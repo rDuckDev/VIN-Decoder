@@ -7,7 +7,7 @@ workbox.core.setCacheNameDetails({
 });
 
 workbox.precaching.precache([
-	"/offline/decode.json"
+	"./offline/decode.json"
 ]);
 
 workbox.routing.registerRoute(
@@ -45,5 +45,5 @@ workbox.routing.registerRoute(
 
 workbox.routing.setCatchHandler(({event}) => {
 	// respond with "app offline" message when API cannot be reached
-	if (apiURL.test(event.request.url)) return caches.match("/offline/decode.json");
+	if (apiURL.test(event.request.url)) return caches.match("./offline/decode.json");
 });
