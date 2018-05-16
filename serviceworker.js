@@ -8,7 +8,6 @@ workbox.core.setCacheNameDetails({
 });
 
 workbox.precaching.precacheAndRoute([
-	"/",
 	"./offline/decode.json"
 ]);
 

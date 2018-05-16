@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.1.1/dist/yeti/bootstrap.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@4.1.1/dist/lux/bootstrap.css">
 	<link rel="manifest" href="./manifest/manifest.json">
 	<link rel="icon" sizes="192x192" href="./manifest/icons/icon-192x192.png">
 
@@ -28,7 +28,7 @@
 				<div class="form-group mb-4">
 					<div class="input-group">
 						<div class="input-group-prepend">
-							<span class="input-group-text" style="width: 40px;">{{ inputVIN.length }}</span>
+							<span class="input-group-text">{{ inputVIN.length }}</span>
 						</div>
 						<input id="inputVIN" class="form-control" placeholder="Enter a VIN" maxlength="17" autofocus
 							v-bind:value="inputVIN.toUpperCase()"
