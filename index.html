@@ -239,7 +239,10 @@
 										self.errorMessage = decodedVIN.ErrorCode.substring(4);
 										if (decodedVIN.SuggestedVIN) self.errorMessage += " Suggested VIN: " + decodedVIN.SuggestedVIN;
 									}
-									self.decoderData = composeDecodedVIN(decodedVIN);
+
+									// X is used as the custom error code for no network (from service worker),
+									// so only decode if there is actual data returned
+									if (decodedVIN.ErrorCode.charAt(0) !== "X") self.decoderData = composeDecodedVIN(decodedVIN);
 								}
 							});
 					}
