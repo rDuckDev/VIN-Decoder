@@ -17,9 +17,8 @@ workbox.routing.registerRoute(
 	workbox.strategies.networkFirst()
 );
 
-// cache static content like JS and CSS for faster (or offline) use
 workbox.routing.registerRoute(
-	/.*\.(?:js|css)$/,
+	/.*(\.js|\.css|\.ttf|\.woff2)$/i,
 	workbox.strategies.cacheFirst({
 		plugins: [
 			new workbox.cacheableResponse.Plugin({
@@ -27,12 +26,6 @@ workbox.routing.registerRoute(
 			})
 		]
 	}),
-);
-
-// cache fonts for offline use
-workbox.routing.registerRoute(
-	new RegExp("https://fonts.(?:googleapis|gstatic).com/(.*)"),
-	workbox.strategies.cacheFirst(),
 );
 
 workbox.routing.registerRoute(
