@@ -42,3 +42,8 @@ workbox.routing.registerRoute(
 		]
 	})
 );
+
+workbox.routing.setCatchHandler(({event}) => {
+	// respond with "app offline" message when API cannot be reached
+	if (apiURL.test(event.request.url)) return caches.match("/offline/decode.json");
+});
