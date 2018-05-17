@@ -17,7 +17,7 @@ workbox.routing.registerRoute(
 );
 
 workbox.routing.registerRoute(
-	/.*(\.js|\.css|\.ttf|\.woff2)$/i,
+	/.*(\.js|\.css|\.png|\.ttf|\.woff2)$/i,
 	workbox.strategies.cacheFirst({
 		plugins: [
 			new workbox.cacheableResponse.Plugin({
