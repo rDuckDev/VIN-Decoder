@@ -6,4 +6,4 @@ Check out the [demo](https://cdn.rawgit.com/rDuckDev/VIN-Decoder/v1.0.5/) hosted
 
 ## Attribution
 
-Icon by [Benjamin STAWARZ](https://www.iconfinder.com/butterflytronics) at [iconfinder.com](www.iconfinder.com) is licensed by [CC 3.0 BY](https://creativecommons.org/licenses/by/3.0/)
+Icon by [Benjamin STAWARZ](https://www.iconfinder.com/butterflytronics) at [iconfinder.com](www.iconfinder.com) is licensed by [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/).
