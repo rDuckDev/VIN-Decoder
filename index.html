@@ -33,11 +33,11 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text">{{ inputVIN.length }}</span>
 						</div>
-						<input id="inputVIN" class="form-control" placeholder="Enter a VIN" maxlength="17" autofocus
+						<input id="inputVIN" class="form-control" type="text" placeholder="Enter a VIN" maxlength="17" autofocus
 							v-bind:value="inputVIN.toUpperCase()"
-							v-on:input="inputVIN = fixInput(event)"
+							v-on:input="inputVIN = fixInput($event)"
 							v-on:focus="$event.target.select()"
-							v-on:keypress="filterInput(event)">
+							v-on:keypress="filterInput($event)">
 						<div class="input-group-append">
 							<button class="btn btn-primary" v-on:click.prevent="decodeVIN">Decode</button>
 						</div>
