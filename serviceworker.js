@@ -13,7 +13,7 @@ workbox.precaching.precache([
 
 workbox.routing.registerRoute(
 	/.*(\/|\.htm|\.html)$/i,
-	workbox.strategies.networkFirst()
+	workbox.strategies.cacheFirst()
 );
 
 workbox.routing.registerRoute(
@@ -30,7 +30,7 @@ workbox.routing.registerRoute(
 const apiURL = new RegExp("https://vpic.nhtsa.dot.gov/api/*");
 workbox.routing.registerRoute(
 	apiURL,
-	workbox.strategies.staleWhileRevalidate({
+	workbox.strategies.cacheFirst({
 		cacheName: apiCacheName,
 		plugins: [
 			new workbox.cacheableResponse.Plugin({
