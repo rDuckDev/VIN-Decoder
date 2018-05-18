@@ -234,7 +234,9 @@
 									// which decode as 2010 or later might actually be from the
 									// original 30 years of codes leading up to 2010
 									if (decodedVIN.ErrorCode &&
-										decodedVIN.ErrorCode.charAt(0) === "8" &&
+										// 5 = VIN has errors in few positions
+										// 8 = No detailed data available currently
+										/(8|5)/ig.test(decodedVIN.ErrorCode.charAt(0)) &&
 										decodedVIN.ModelYear &&
 										parseInt(decodedVIN.ModelYear) >= 2010 &&
 										/(model year).*(incorrect)/ig.test(decodedVIN.AdditionalErrorText)) {
