@@ -205,7 +205,7 @@
 
 						control.setSelectionRange(start, end);
 					},
-					decodeVIN: function () {
+					decodeVIN: function (year) {
 						let self = this;
 
 						if (self.inputVIN.length !== 17) {
@@ -213,7 +213,9 @@
 							return;
 						}
 
-						jQuery.get("https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/" + self.inputVIN + "?format=json")
+						let decodeURL = "https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/" + self.inputVIN + "?format=json";
+						if (year && typeof year === "number") decodeURL += "&modelyear=" + year;
+						jQuery.get(decodeURL)
 							.then(function (data) {
 								self.decoderData = [];
 								self.inputMessage = "";
@@ -225,10 +227,24 @@
 									return;
 								}
 
-								self.inputMessage = data.Message;
-
-								if (data.Count > 0) {
+								if (data.Count) {
 									let decodedVIN = data.Results[0];
+
+									// year character of VIN was recycled in 2010, so vehicles
+									// which decode as 2010 or later might actually be from the
+									// original 30 years of codes leading up to 2010
+									if (decodedVIN.ErrorCode &&
+										decodedVIN.ErrorCode.charAt(0) === "8" &&
+										decodedVIN.ModelYear &&
+										parseInt(decodedVIN.ModelYear) >= 2010 &&
+										/(model year).*(incorrect)/ig.test(decodedVIN.AdditionalErrorText)) {
+										let modelYear = parseInt(decodedVIN.ModelYear) - 30;
+
+										// bail on this decode
+										return self.decodeVIN(modelYear);
+									}
+
+									self.inputMessage = data.Message;
 
 									if (decodedVIN.ErrorCode.charAt(0) !== "0") {
 										self.errorMessage = decodedVIN.ErrorCode.substring(4);
