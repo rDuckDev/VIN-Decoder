@@ -213,8 +213,7 @@
 							return;
 						}
 
-						jQuery.get("https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/" + self.inputVIN +
-								"?format=json")
+						jQuery.get("https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/" + self.inputVIN + "?format=json")
 							.then(function (data) {
 								self.decoderData = [];
 								self.inputMessage = "";
