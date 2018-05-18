@@ -4,7 +4,7 @@
 	"theme_color": "#8E8C84",
 	"background_color": "#8E8C84",
 	"display": "standalone",
-	"Scope": "/",
+	"Scope": "/rDuckDev/VIN-Decoder/v1.0.5/",
 	"start_url": "/rDuckDev/VIN-Decoder/v1.0.5/",
 	"icons": [{
 			"src": "./icons/icon-72x72.png",
