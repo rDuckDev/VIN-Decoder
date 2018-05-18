@@ -7,8 +7,8 @@ workbox.core.setCacheNameDetails({
 });
 
 workbox.precaching.precache([
-	"/rDuckDev/VIN-Decoder/v1.0.7/",
-	"/rDuckDev/VIN-Decoder/v1.0.7/offline/decode.json"
+	"/rDuckDev/VIN-Decoder/v1.0.8/",
+	"/rDuckDev/VIN-Decoder/v1.0.8/offline/decode.json"
 ]);
 
 workbox.routing.registerRoute(
@@ -46,5 +46,5 @@ workbox.routing.registerRoute(
 
 workbox.routing.setCatchHandler(({event}) => {
 	// respond with "app offline" message when API cannot be reached
-	if (apiURL.test(event.request.url)) return caches.match("/rDuckDev/VIN-Decoder/v1.0.7/offline/decode.json");
+	if (apiURL.test(event.request.url)) return caches.match("/rDuckDev/VIN-Decoder/v1.0.8/offline/decode.json");
 });
