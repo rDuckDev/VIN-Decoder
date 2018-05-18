@@ -34,10 +34,9 @@
 							<span class="input-group-text">{{ inputVIN.length }}</span>
 						</div>
 						<input id="inputVIN" class="form-control" type="text" placeholder="Enter a VIN" maxlength="17" autofocus
-							v-bind:value="inputVIN.toUpperCase()"
-							v-on:input="inputVIN = fixInput($event)"
-							v-on:focus="$event.target.select()"
-							v-on:keypress="filterInput($event)">
+							v-bind:value="inputVIN"
+							v-on:input="cleanInput($event)"
+							v-on:focus="$event.target.select()">
 						<div class="input-group-append">
 							<button class="btn btn-primary" v-on:click.prevent="decodeVIN">Decode</button>
 						</div>
@@ -193,24 +192,18 @@
 					decoderData: []
 				},
 				methods: {
-					fixInput: function (event) {
-						return event.target.value
-							.toUpperCase()
+					cleanInput: function (event) {
+						const control = event.target,
+							start = control.selectionStart,
+							end = control.selectionEnd;
+
+						this.inputVIN = control.value = control.value.toUpperCase()
+							.replace(/[^A-Z\d]/ig, "")
 							.replace("O", "0")
 							.replace("Q", "0")
 							.replace("I", "1");
-					},
-					filterInput: function (event) {
-						// allow return key to submit form
-						if (event.which === 13) return true;
 
-						let input = String.fromCharCode(event.which);
-
-						if (/[A-Z0-9]/ig.test(input)) return true;
-
-						this.inputMessage = "That character is not allowed";
-
-						event.preventDefault()
+						control.setSelectionRange(start, end);
 					},
 					decodeVIN: function () {
 						let self = this;
