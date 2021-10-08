@@ -2,7 +2,7 @@
 
 ## Demo
 
-[Try it](https://rduckdev.github.io/vin-decoder/) with GitHub Pages.
+[Try it](https://rduckdev.github.io/VIN-Decoder/) with GitHub Pages.
 
 ## Attribution
 
