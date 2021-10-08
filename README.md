@@ -2,7 +2,7 @@
 
 ## Demo
 
-[Try it](https://cdn.rawgit.com/rDuckDev/VIN-Decoder/v1.0.11/) with RawGit.
+[Try it](https://rduckdev.github.io/vin-decoder/) with GitHub Pages.
 
 ## Attribution
 
