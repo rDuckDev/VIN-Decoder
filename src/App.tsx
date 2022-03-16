@@ -114,7 +114,7 @@ function App() {
                 onInput={handleInput}
                 autoFocus
               />
-              <button type='submit' className='btn btn-outline-secondary'>
+              <button type='submit' className='btn btn-secondary'>
                 Decode
               </button>
             </section>
