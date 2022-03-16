@@ -22,6 +22,7 @@ function App() {
   const [vin, setVin] = useState<string>('');
   const [messages, setMessages] = useState<string[]>([]);
   const [vehicle, setVehicle] = useState<IAttributeValue[]>([]);
+  const [preview, setPreview] = useState<string>('');
   const [isLoading, toggleLoading] = useState<boolean>(false);
 
   const handleSubmit: React.FormEventHandler = (event) => {
@@ -62,6 +63,7 @@ function App() {
         }
         setMessages(_.compact(pendingMessages));
         setVehicle(formatDecodedVehicle(decoder));
+        setPreview(getBodyClassImageUri(decoder.BodyClass));
       })
       .catch((error) => {
         setMessages([error.message]);
@@ -135,20 +137,37 @@ function App() {
           </section>
         )}
         {!!vehicle.length && !isLoading && (
-          <section className='container mb-3'>
-            <table className='table table-sm table-striped table-hover'>
-              <tbody>
-                {vehicle.map((attribute, index) => (
-                  <React.Fragment key={index}>
-                    <tr>
-                      <td>{attribute.Variable}</td>
-                      <td>{attribute.Value}</td>
-                    </tr>
-                  </React.Fragment>
-                ))}
-              </tbody>
-            </table>
-          </section>
+          <React.Fragment>
+            {!!preview && (
+              <section className='container mb-3'>
+                <section className='card'>
+                  <section className='card-body row justify-content-center g-0'>
+                    <section className='col-10 col-md-8 col-lg-6'>
+                      <img
+                        alt='example vehicle'
+                        src={`${process.env.PUBLIC_URL}/images/body-class/${preview}`}
+                        className='img-fluid w-100'
+                      />
+                    </section>
+                  </section>
+                </section>
+              </section>
+            )}
+            <section className='container'>
+              <table className='table table-sm table-striped table-hover m-0'>
+                <tbody>
+                  {vehicle.map((attribute, index) => (
+                    <React.Fragment key={index}>
+                      <tr>
+                        <td>{attribute.Variable}</td>
+                        <td>{attribute.Value}</td>
+                      </tr>
+                    </React.Fragment>
+                  ))}
+                </tbody>
+              </table>
+            </section>
+          </React.Fragment>
         )}
       </section>
       {isLoading && (
@@ -333,6 +352,57 @@ function formatPlant(vehicle: any) {
   if (vehicle.PlantCountry) plant.push(vehicle.PlantCountry);
 
   return plant.join(', ').trim();
+}
+
+function getBodyClassImageUri(body: string): string {
+  const options: any = {
+    'Convertible/Cabriolet': '1.png',
+    Minivan: '2.png',
+    Coupe: '3.png',
+    'Low Speed Vehicle (LSV) / Neighborhood Electric Vehicle (NEV)': '4.png',
+    'Hatchback/Liftback/Notchback': '5.png',
+    'Motorcycle - Standard': '6.png',
+    'Sport Utility Vehicle (SUV)/Multi-Purpose Vehicle (MPV)': '7.png',
+    'Crossover Utility Vehicle (CUV)': '8.png',
+    Van: '9.png',
+    Roadster: '10.png',
+    Truck: '11.png',
+    'Motorcycle - Scooter': '12.png',
+    'Sedan/Saloon': '13.png',
+    Wagon: '15.png',
+    Bus: '16.png',
+    Pickup: '60.png',
+    Trailer: '61.png',
+    'Incomplete - Cutaway': '62.png',
+    'Incomplete - Chassis Cab (Single Cab)': '63.png',
+    'Truck-Tractor': '66.png',
+    'Incomplete - Stripped Chassis': '67.png',
+    'Streetcar / Trolley': '68.png',
+    'Off-road Vehicle - All Terrain Vehicle (ATV) (Motorcycle-style)': '69.png',
+    'Incomplete - School Bus Chassis': '71.png',
+    'Incomplete - Commercial Bus Chassis': '72.png',
+    'Bus - School Bus': '73.png',
+    'Incomplete - Chassis Cab (Number of Cab Unknown)': '74.png',
+    'Incomplete - Transit Bus Chassis': '75.png',
+    'Incomplete - Motor Coach Chassis': '76.png',
+    'Incomplete - Shuttle Bus Chassis': '77.png',
+    'Incomplete - Motor Home Chassis': '78.png',
+    'Motorcycle - Sport': '80.png',
+    'Motorcycle - Touring / Sport Touring': '81.png',
+    'Motorcycle - Cruiser': '82.png',
+    'Motorcycle - Trike': '83.png',
+    'Off-road Vehicle - Dirt Bike / Off-Road': '84.png',
+    'Motorcycle - Dual Sport / Adventure / Supermoto / On/Off-Road': '85.png',
+    'Off-road Vehicle - Enduro (Off-road long distance racing)': '86.png',
+    'Motorcycle - Custom': '94.png',
+    'Cargo Van': '95.png',
+    'Off-road Vehicle - Snowmobile': '97.png',
+    'Motorcycle - Street': '98.png',
+    'Motorcycle - Enclosed Three Wheeled / Enclosed Autocycle': '100.png',
+    'Motorcycle - Unenclosed Three Wheeled / Open Autocycle': '103.png',
+    'Off-road Vehicle - Golf Cart': '124.png',
+  };
+  return options[body] || '';
 }
 
 export default App;
