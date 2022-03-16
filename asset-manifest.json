@@ -1,0 +1,12 @@
+{
+  "files": {
+    "main.js": "/VIN-Decoder/static/js/main.bbe5e886.js",
+    "static/js/787.3453b138.chunk.js": "/VIN-Decoder/static/js/787.3453b138.chunk.js",
+    "index.html": "/VIN-Decoder/index.html",
+    "main.bbe5e886.js.map": "/VIN-Decoder/static/js/main.bbe5e886.js.map",
+    "787.3453b138.chunk.js.map": "/VIN-Decoder/static/js/787.3453b138.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.bbe5e886.js"
+  ]
+}
