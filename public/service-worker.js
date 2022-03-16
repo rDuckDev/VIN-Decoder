@@ -12,6 +12,7 @@ workbox.core.setCacheNameDetails({
 workbox.precaching.precache([
   '/VIN-Decoder/',
   '/VIN-Decoder/offline/decoder-values.json',
+  '/VIN-Decoder/offline/decoder-variables.json',
 ]);
 
 // cache any page a user visits
