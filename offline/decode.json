@@ -1,8 +1,0 @@
-{
-	"Count": 1,
-	"Message": "Network offline",
-	"Results": [{
-		"ErrorCode": "X - It appears you are offline. Please check your network connection and try again."
-	}],
-	"SearchCriteria": "VIN"
-}
