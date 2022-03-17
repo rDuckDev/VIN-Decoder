@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React, {useState} from 'react';
 import VehicleApiService from './api/services/VehicleApiService';
+import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
 import {IVehicleAttribute} from './interfaces/IVehicleApiResponse';
 
@@ -150,11 +151,7 @@ function App() {
           </section>
         </section>
       )}
-      <footer className='container text-center'>
-        <section className='border-top d-inline-block p-2'>
-          rDuckDev © {new Date().getFullYear()} | All rights reserved
-        </section>
-      </footer>
+      <Footer />
     </React.Fragment>
   );
 }
