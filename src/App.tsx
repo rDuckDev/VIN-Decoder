@@ -1,27 +1,12 @@
-import axios from 'axios';
 import _ from 'lodash';
 import React, {useState} from 'react';
-
-/** This interface specifies a response from the vPIC API */
-interface IVehicleApiResponse<T> {
-  Count: number;
-  Message: string;
-  SearchCriteria: string | null;
-  Results: T[];
-}
-
-/** This interface specifies a vehicle attribute */
-interface IAttributeValue {
-  VariableId: number; // IAttributeVariable->ID
-  Variable: string;
-  ValueId: string | null;
-  Value: string | null;
-}
+import VehicleApiService from './api/services/VehicleApiService';
+import {IVehicleAttribute} from './interfaces/IVehicleApiResponse';
 
 function App() {
   const [vin, setVin] = useState<string>('');
   const [messages, setMessages] = useState<string[]>([]);
-  const [vehicle, setVehicle] = useState<IAttributeValue[]>([]);
+  const [vehicle, setVehicle] = useState<IVehicleAttribute[]>([]);
   const [preview, setPreview] = useState<string>('');
   const [isLoading, toggleLoading] = useState<boolean>(false);
 
@@ -38,9 +23,7 @@ function App() {
     // always activate the loader
     toggleLoading(true);
 
-    let uri = `https://vpic.nhtsa.dot.gov/api/vehicles/decodevinvaluesextended/${vin}?format=json`;
-    axios
-      .get<IVehicleApiResponse<{[key: string]: string}>>(uri)
+    VehicleApiService.decodeVin(vin)
       .then((response) => {
         let {data} = response;
 
