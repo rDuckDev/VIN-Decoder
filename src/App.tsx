@@ -3,6 +3,7 @@ import React, {useState} from 'react';
 import VehicleApiService from './api/services/VehicleApiService';
 import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
+import ProgressSpinner from './components/ProgressSpinner';
 import {IVehicleAttribute} from './interfaces/IVehicleApiResponse';
 
 function App() {
@@ -144,10 +145,8 @@ function App() {
       </section>
       {isLoading && (
         <section className='d-flex flex-column align-items-center flex-grow-1'>
-          <section className='container text-center'>
-            <span className='text-secondary fa-5x'>
-              <i className='fa-solid fa-spinner fa-spin-pulse' />
-            </span>
+          <section className='container text-center text-secondary'>
+            <ProgressSpinner size={5} />
           </section>
         </section>
       )}
