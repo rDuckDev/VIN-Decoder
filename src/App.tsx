@@ -5,7 +5,7 @@ import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
 import ProgressSpinner from './components/ProgressSpinner';
 import {IVehicleAttribute} from './interfaces/IVehicleApiResponse';
-import VinInputControl from './pages/Decoder/components/VinInputControl';
+import VinInputGroup from './pages/Decoder/components/VinInputGroup';
 import {useVinContext} from './utils/providers/VinContextProvider';
 
 function App() {
@@ -67,15 +67,7 @@ function App() {
       <section className='flex-grow-1 flex-shrink-1 mb-3'>
         <section className='container mb-3'>
           <form onSubmit={handleSubmit}>
-            <section className='input-group'>
-              <span className='input-group-text text-muted'>
-                {vin.length.toString().padStart(2, '0')}
-              </span>
-              <VinInputControl />
-              <button type='submit' className='btn btn-secondary'>
-                Decode
-              </button>
-            </section>
+            <VinInputGroup />
           </form>
         </section>
         {!!messages.length && !isLoading && (
