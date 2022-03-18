@@ -5,9 +5,11 @@ import Footer from './components/layouts/Footer';
 import Header from './components/layouts/Header';
 import ProgressSpinner from './components/ProgressSpinner';
 import {IVehicleAttribute} from './interfaces/IVehicleApiResponse';
+import VinInputControl from './pages/Decoder/components/VinInputControl';
+import {useVinContext} from './utils/providers/VinContextProvider';
 
 function App() {
-  const [vin, setVin] = useState<string>('');
+  const {vin} = useVinContext();
   const [messages, setMessages] = useState<string[]>([]);
   const [vehicle, setVehicle] = useState<IVehicleAttribute[]>([]);
   const [preview, setPreview] = useState<string>('');
@@ -59,17 +61,6 @@ function App() {
       .finally(() => toggleLoading(false));
   };
 
-  const handleInput = (event: any) => {
-    setVin(
-      event.target.value
-        .toUpperCase()
-        .replace(/[^A-Z\d]/gi, '')
-        .replace('O', '0')
-        .replace('I', '1')
-        .replace('Q', '9')
-    );
-  };
-
   return (
     <React.Fragment>
       <Header />
@@ -80,15 +71,7 @@ function App() {
               <span className='input-group-text text-muted'>
                 {vin.length.toString().padStart(2, '0')}
               </span>
-              <input
-                type='text'
-                className='form-control'
-                placeholder='Enter a VIN'
-                maxLength={17}
-                value={vin}
-                onInput={handleInput}
-                autoFocus
-              />
+              <VinInputControl />
               <button type='submit' className='btn btn-secondary'>
                 Decode
               </button>

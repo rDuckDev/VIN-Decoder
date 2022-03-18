@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import worker from './registerServiceWorker';
 import reportWebVitals from './reportWebVitals';
+import VinContextProvider from './utils/providers/VinContextProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <VinContextProvider>
+      <App />
+    </VinContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );
