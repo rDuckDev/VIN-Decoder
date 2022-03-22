@@ -4,6 +4,7 @@ import VehicleApiService from '../../api/services/VehicleApiService';
 import ProgressSpinner from '../../components/ProgressSpinner';
 import {useDecoderContext} from '../../utils/providers/DecoderContextProvider';
 import {useVinContext} from '../../utils/providers/VinContextProvider';
+import DecoderTable from './components/DecoderTable';
 import VinInputGroup from './components/VinInputGroup';
 
 function Decoder() {
@@ -104,20 +105,7 @@ function Decoder() {
                 </section>
               </section>
             )}
-            <section className='container'>
-              <table className='table table-sm table-striped table-hover m-0'>
-                <tbody>
-                  {vehicle.map((attribute, index) => (
-                    <React.Fragment key={index}>
-                      <tr>
-                        <td>{attribute.Variable}</td>
-                        <td>{attribute.Value}</td>
-                      </tr>
-                    </React.Fragment>
-                  ))}
-                </tbody>
-              </table>
-            </section>
+            <DecoderTable />
           </React.Fragment>
         )}
       </section>
