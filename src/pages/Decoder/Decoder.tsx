@@ -69,40 +69,43 @@ function Decoder() {
 
   return (
     <React.Fragment>
-      <section className='flex-grow-1 flex-shrink-1 mb-3'>
+      <section className='flex-fill d-flex flex-column'>
         <section className='container mb-3'>
           <form onSubmit={handleSubmit}>
             <VinInputGroup />
           </form>
         </section>
-        {!!messages.length && !isLoading && (
-          <section className='container mb-3'>
-            <ul className='list-group'>
-              {messages.map((message, index) => (
-                <li
-                  key={index}
-                  className='list-group-item list-group-item-light'
-                >
-                  {message}
-                </li>
-              ))}
-            </ul>
+        {(isLoading && (
+          <section className='flex-fill d-flex align-items-center'>
+            <section className='text-secondary mx-auto'>
+              <ProgressSpinner size={5} />
+            </section>
           </section>
-        )}
-        {!!vehicle.length && !isLoading && (
+        )) || (
           <React.Fragment>
-            <DecoderBodyClassImage />
-            <DecoderTable />
+            {!!messages.length && (
+              <section className='container mb-3'>
+                <ul className='list-group'>
+                  {messages.map((message, index) => (
+                    <li
+                      key={index}
+                      className='list-group-item list-group-item-light'
+                    >
+                      {message}
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            )}
+            {!!vehicle.length && (
+              <React.Fragment>
+                <DecoderBodyClassImage />
+                <DecoderTable />
+              </React.Fragment>
+            )}
           </React.Fragment>
         )}
       </section>
-      {isLoading && (
-        <section className='d-flex flex-column align-items-center flex-grow-1'>
-          <section className='container text-center text-secondary'>
-            <ProgressSpinner size={5} />
-          </section>
-        </section>
-      )}
     </React.Fragment>
   );
 }
