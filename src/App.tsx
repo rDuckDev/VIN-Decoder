@@ -7,7 +7,6 @@ import DecoderContextProvider from './utils/providers/DecoderContextProvider';
 function App() {
   return (
     <React.Fragment>
-      {console.log(`App: render at ${new Date().getTime()}`)}
       <Header />
       <DecoderContextProvider>
         <Decoder />

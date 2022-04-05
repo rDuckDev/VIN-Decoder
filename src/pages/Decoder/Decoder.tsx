@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import VehicleApiService from '../../api/services/VehicleApiService';
+import MessageList from '../../components/MessageList';
 import ProgressSpinner from '../../components/ProgressSpinner';
 import {useDecoderContext} from '../../utils/providers/DecoderContextProvider';
 import {useVinContext} from '../../utils/providers/VinContextProvider';
@@ -83,20 +84,7 @@ function Decoder() {
           </section>
         )) || (
           <React.Fragment>
-            {!!messages.length && (
-              <section className='container mb-3'>
-                <ul className='list-group'>
-                  {messages.map((message, index) => (
-                    <li
-                      key={index}
-                      className='list-group-item list-group-item-light'
-                    >
-                      {message}
-                    </li>
-                  ))}
-                </ul>
-              </section>
-            )}
+            <MessageList messages={messages} />
             {!!vehicle.length && (
               <React.Fragment>
                 <DecoderBodyClassImage />
