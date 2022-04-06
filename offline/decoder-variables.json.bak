@@ -1,0 +1,203 @@
+{
+  "Mechanical": {
+    "Battery": {
+      "Other Battery Info": 1,
+      "Battery Type": 2,
+      "Number of Battery Cells per Module": 48,
+      "Battery Current (Amps) From": 57,
+      "Battery Voltage (Volts) From": 58,
+      "Battery Energy (kWh) From": 59,
+      "EV Drive Unit": 72,
+      "Charger": {
+        "Charger Level": 127,
+        "Charger Power (kW)": 128
+      },
+      "Battery Current (Amps) To": 132,
+      "Battery Voltage (Volts) To": 133,
+      "Battery Energy (kWh) To": 134,
+      "Number of Battery Modules per Pack": 137,
+      "Number of Battery Packs per Vehicle": 138
+    },
+    "Drivetrain": {
+      "Drive Type": 15,
+      "Axles": 41,
+      "Axle Configuration": 145
+    },
+    "Transmission": {
+      "Transmission Style": 37,
+      "Transmission Speeds": 63
+    },
+    "Brake": {
+      "Brake System Type": 42,
+      "Brake System Description": 52
+    }
+  },
+  "Exterior": {
+    "Truck": {
+      "Bed Type": 3,
+      "Cab Type": 4
+    },
+    "Body": {
+      "Body Class": 5,
+      "Doors": 14,
+      "Windows": 40,
+      "Wheel Base Type": 60,
+      "Track Width (inches)": 159
+    },
+    "Dimension": {
+      "Gross Vehicle Weight Rating From": 25,
+      "Bed Length (inches)": 49,
+      "Curb Weight (pounds)": 54,
+      "Wheel Base (inches) From": 111,
+      "Wheel Base (inches) To": 112,
+      "Gross Combination Weight Rating From": 184,
+      "Gross Combination Weight Rating To": 185,
+      "Gross Vehicle Weight Rating To": 190
+    },
+    "Wheel tire": {
+      "Number of Wheels": 115,
+      "Wheel Size Front (inches)": 119,
+      "Wheel Size Rear (inches)": 120
+    },
+    "Trailer": {
+      "Trailer Type Connection": 116,
+      "Trailer Body Type": 117,
+      "Trailer Length (feet)": 118,
+      "Other Trailer Info": 155
+    },
+    "Bus": {
+      "Bus Length (feet)": 147,
+      "Bus Floor Configuration Type": 148,
+      "Bus Type": 149,
+      "Other Bus Info": 150
+    },
+    "Motorcycle": {
+      "Custom Motorcycle Type": 151,
+      "Motorcycle Suspension Type": 152,
+      "Motorcycle Chassis Type": 153,
+      "Other Motorcycle Info": 154
+    }
+  },
+  "Engine": {
+    "Engine Number of Cylinders": 9,
+    "Displacement (CC)": 11,
+    "Displacement (CI)": 12,
+    "Displacement (L)": 13,
+    "Engine Stroke Cycles": 17,
+    "Engine Model": 18,
+    "Engine Power (kW)": 21,
+    "Fuel Type - Primary": 24,
+    "Valve Train Design": 62,
+    "Engine Configuration": 64,
+    "Fuel Type - Secondary": 66,
+    "Fuel Delivery": {
+      "Fuel Injection Type": 67
+    },
+    "Engine Brake (hp) From": 71,
+    "Cooling Type": 122,
+    "Engine Brake (hp) To": 125,
+    "Electrification Level": 126,
+    "Other Engine Info": 129,
+    "Turbo": 135,
+    "Top Speed (MPH)": 139,
+    "Engine Manufacturer": 146
+  },
+  "General": {
+    "Destination Market": 10,
+    "Make": 26,
+    "Manufacturer Name": 27,
+    "Model": 28,
+    "Model Year": 29,
+    "Plant City": 31,
+    "Series": 34,
+    "Trim": 38,
+    "Vehicle Type": 39,
+    "Plant Country": 75,
+    "Plant Company Name": 76,
+    "Plant State": 77,
+    "Trim2": 109,
+    "Series2": 110,
+    "Note": 114,
+    "Base Price ($)": 136,
+    "Non-Land Use": 195
+  },
+  "Interior": {
+    "Entertainment System": 23,
+    "Seat": {
+      "Number of Seats": 33,
+      "Number of Seat Rows": 61
+    },
+    "Steering Location": 36
+  },
+  "Passive Safety System": {
+    "Air Bag Location": {
+      "Curtain Air Bag Locations": 55,
+      "Seat Cushion Air Bag Locations": 56,
+      "Front Air Bag Locations": 65,
+      "Knee Air Bag Locations": 69,
+      "Side Air Bag Locations": 107
+    },
+    "Pretensioner": 78,
+    "Seat Belt Type": 79,
+    "Other Restraint System Info": 121
+  },
+  "Active Safety System": {
+    "Maintaining Safe Distance": {
+      "Adaptive Cruise Control (ACC)": 81
+    },
+    "Anti-lock Braking System (ABS)": 86,
+    "Forward Collision Prevention": {
+      "Crash Imminent Braking (CIB)": 87,
+      "Forward Collision Warning (FCW)": 101,
+      "Dynamic Brake Support (DBS)": 170,
+      "Pedestrian Automatic Emergency Braking (PAEB)": 171
+    },
+    "Lane and Side Assist": {
+      "Blind Spot Warning (BSW)": 88,
+      "Lane Departure Warning (LDW)": 102,
+      "Lane Keeping Assistance (LKA)": 103,
+      "Blind Spot Intervention (BSI)": 193,
+      "Lane Centering Assistance": 194
+    },
+    "Electronic Stability Control (ESC)": 99,
+    "Traction Control": 100,
+    "Backing Up and Parking": {
+      "Backup Camera": 104,
+      "Parking Assist": 105,
+      "Rear Cross Traffic Alert": 183,
+      "Rear Automatic Emergency Braking": 192
+    },
+    "Tire Pressure Monitoring System (TPMS) Type": 168,
+    "Active Safety System Note": 169,
+    "Auto-Reverse System for Windows and Sunroofs": 172,
+    "Automatic Pedestrian Alerting Sound (for Hybrid and EV only)": 173,
+    "911 Notification": {
+      "Automatic Crash Notification (ACN)": {
+        "Advanced Automatic Crash Notification (AACN)": 174
+      }
+    },
+    "Event Data Recorder (EDR)": 175,
+    "Keyless Ignition": 176,
+    "Lighting Technologies": {
+      "Daytime Running Light (DRL)": 177,
+      "Headlamp Light Source": 178,
+      "Semiautomatic Headlamp Beam Switching": 179,
+      "Adaptive Driving Beam (ADB)": 180
+    },
+    "SAE Automation Level From": 181,
+    "SAE Automation Level To": 182
+  },
+  "Internal": {
+    "NCSA Body Type": 96,
+    "NCSA Make": 97,
+    "NCSA Model": 98,
+    "NCSA Note": 186
+  },
+  "Messages": {
+    "Suggested VIN": 142,
+    "Error Code": 143,
+    "Possible Values": 144,
+    "Additional Error Text": 156,
+    "Error Text": 191
+  }
+}

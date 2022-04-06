@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/VIN-Decoder/static/js/main.7cece08d.js",
+    "main.js": "/VIN-Decoder/static/js/main.327508dc.js",
     "static/js/787.3453b138.chunk.js": "/VIN-Decoder/static/js/787.3453b138.chunk.js",
     "index.html": "/VIN-Decoder/index.html",
-    "main.7cece08d.js.map": "/VIN-Decoder/static/js/main.7cece08d.js.map",
+    "main.327508dc.js.map": "/VIN-Decoder/static/js/main.327508dc.js.map",
     "787.3453b138.chunk.js.map": "/VIN-Decoder/static/js/787.3453b138.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.7cece08d.js"
+    "static/js/main.327508dc.js"
   ]
 }
