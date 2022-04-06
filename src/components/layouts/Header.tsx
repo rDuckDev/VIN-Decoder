@@ -1,9 +1,10 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Header() {
   return (
     <header className='border-bottom mb-3'>
-      <nav className='navbar navbar-light bg-light'>
+      <nav className='navbar navbar-expand-sm navbar-light bg-light'>
         <section className='container'>
           <span className='navbar-brand d-flex align-items-center'>
             <img
@@ -13,6 +14,30 @@ function Header() {
             />
             VIN Decoder
           </span>
+
+          <button
+            className='navbar-toggler'
+            type='button'
+            data-bs-toggle='collapse'
+            data-bs-target='#nav-main'
+          >
+            <span className='navbar-toggler-icon'></span>
+          </button>
+
+          <div className='collapse navbar-collapse' id='nav-main'>
+            <ul className='navbar-nav me-auto'>
+              <li className='nav-item'>
+                <Link to='/decode' className='nav-link'>
+                  Decoder
+                </Link>
+              </li>
+              <li className='nav-item'>
+                <Link to='/history' className='nav-link'>
+                  History
+                </Link>
+              </li>
+            </ul>
+          </div>
         </section>
       </nav>
     </header>
