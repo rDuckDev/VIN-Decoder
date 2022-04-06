@@ -7,9 +7,15 @@ export default interface IVehicleApiResponse<T> {
 }
 
 /** Specifies a decoded vehicle attribute. */
-export interface IVehicleAttribute {
-  VariableId: number; //->IAttributeMetadata.ID
+export interface IDecoderAttribute {
+  VariableId: number; //->IDecoderMetadata.ID
   Variable: string;
   ValueId: string | null;
   Value: string | null;
+}
+
+export interface IDecoderResults {
+  [attributeId: number | string]: {
+    attribute: IDecoderAttribute;
+  };
 }

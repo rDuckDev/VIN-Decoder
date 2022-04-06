@@ -1,5 +1,7 @@
 import axios from 'axios';
-import IVehicleApiResponse from '../../interfaces/IVehicleApiResponse';
+import IVehicleApiResponse, {
+  IDecoderAttribute
+} from '../../interfaces/IVehicleApiResponse';
 
 /** The initial path of all API calls. */
 const VPIC_API_URI = 'https://vpic.nhtsa.dot.gov/api/vehicles/';
@@ -14,8 +16,8 @@ const VehicleApiService = {
    * @returns A promise of decoded vehicle attributes.
    */
   decodeVin: function (vin: string) {
-    const uri = `${VPIC_API_URI}/decodevinvaluesextended/${vin}?format=${RESPONSE_FORMAT}`;
-    return axios.get<IVehicleApiResponse<any>>(uri);
+    const uri = `${VPIC_API_URI}/decodevinextended/${vin}?format=${RESPONSE_FORMAT}`;
+    return axios.get<IVehicleApiResponse<IDecoderAttribute>>(uri);
   },
 };
 
