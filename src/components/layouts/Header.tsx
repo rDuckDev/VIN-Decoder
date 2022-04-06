@@ -6,14 +6,14 @@ function Header() {
     <header className='border-bottom mb-3'>
       <nav className='navbar navbar-expand-sm navbar-light bg-light'>
         <section className='container'>
-          <span className='navbar-brand d-flex align-items-center'>
+          <Link to='/' className='navbar-brand d-flex align-items-center'>
             <img
               alt=''
               src={`${process.env.PUBLIC_URL}/manifest/icons/icon-30x30.png`}
               className='me-3'
             />
             VIN Decoder
-          </span>
+          </Link>
 
           <button
             className='navbar-toggler'
