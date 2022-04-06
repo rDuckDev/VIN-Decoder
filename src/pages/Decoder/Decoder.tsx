@@ -1,7 +1,6 @@
 import _ from 'lodash';
 import React from 'react';
 import VehicleApiService from '../../api/services/VehicleApiService';
-import MessageList from '../../components/MessageList';
 import ProgressSpinner from '../../components/ProgressSpinner';
 import {useDecoderContext} from '../../utils/providers/DecoderContextProvider';
 import {useVinContext} from '../../utils/providers/VinContextProvider';
@@ -9,6 +8,7 @@ import DecoderBodyClassImage, {
   getBodyClassID,
 } from './components/DecoderBodyClassImage';
 import DecoderTable from './components/DecoderTable';
+import MessageList from './components/MessageList';
 import VinInputGroup from './components/VinInputGroup';
 
 function Decoder() {
