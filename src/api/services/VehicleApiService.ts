@@ -1,7 +1,5 @@
 import axios from 'axios';
-import IVehicleApiResponse, {
-  IAttributeMetadata,
-} from '../../interfaces/IVehicleApiResponse';
+import IVehicleApiResponse from '../../interfaces/IVehicleApiResponse';
 
 /** The initial path of all API calls. */
 const VPIC_API_URI = 'https://vpic.nhtsa.dot.gov/api/vehicles/';
