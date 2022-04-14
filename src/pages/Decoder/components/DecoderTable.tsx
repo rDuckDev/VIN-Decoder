@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React from 'react';
 import {useDecoderContext} from '../../../utils/providers/DecoderContextProvider';
-import DecodedVehicle from '../helpers/DecodedVehicle';
+import DecoderResults from '../helpers/DecoderResults';
 import DecoderTableRow from './DecoderTableRow';
 
-const ATTRIBUTES = DecodedVehicle.getAttributeMap();
+const ATTRIBUTES = DecoderResults.getAttributeMap();
 
 function DecoderTable() {
   const {vehicle} = useDecoderContext();
@@ -31,7 +31,7 @@ function DecoderTable() {
   );
 }
 
-function getSummaryTable(vehicle: DecodedVehicle | undefined) {
+function getSummaryTable(vehicle: DecoderResults | undefined) {
   if (!vehicle) return [];
 
   return [
@@ -124,7 +124,7 @@ function getSummaryTable(vehicle: DecodedVehicle | undefined) {
   ];
 }
 
-function formatBodyType(vehicle: DecodedVehicle) {
+function formatBodyType(vehicle: DecoderResults) {
   const doorCount = vehicle.getAttributeValue(ATTRIBUTES.doors);
 
   return _.compact([
@@ -133,7 +133,7 @@ function formatBodyType(vehicle: DecodedVehicle) {
   ]).join(' ');
 }
 
-function formatEngine(vehicle: DecodedVehicle) {
+function formatEngine(vehicle: DecoderResults) {
   const isMotorcycle = _.includes(
     vehicle.getAttributeValue(ATTRIBUTES.vehicle_type),
     'MOTORCYCLE'
@@ -219,14 +219,14 @@ function formatEngine(vehicle: DecodedVehicle) {
   ]).join('; ');
 }
 
-function formatFuel(vehicle: DecodedVehicle) {
+function formatFuel(vehicle: DecoderResults) {
   return _.compact([
     vehicle.getAttributeValue(ATTRIBUTES.fuel_type_primary),
     vehicle.getAttributeValue(ATTRIBUTES.fuel_type_secondary),
   ]).join('; ');
 }
 
-function formatTransmission(vehicle: DecodedVehicle) {
+function formatTransmission(vehicle: DecoderResults) {
   const speedCount = vehicle.getAttributeValue(ATTRIBUTES.transmission_speeds);
 
   return _.compact([
@@ -235,7 +235,7 @@ function formatTransmission(vehicle: DecodedVehicle) {
   ]).join(' ');
 }
 
-function formatPlant(vehicle: DecodedVehicle) {
+function formatPlant(vehicle: DecoderResults) {
   return _.compact([
     vehicle.getAttributeValue(ATTRIBUTES.plant_city),
     vehicle.getAttributeValue(ATTRIBUTES.plant_state),

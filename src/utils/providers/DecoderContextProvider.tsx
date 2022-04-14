@@ -1,12 +1,12 @@
 import React from 'react';
-import DecodedVehicle from '../../pages/Decoder/helpers/DecodedVehicle';
+import DecoderResults from '../../pages/Decoder/helpers/DecoderResults';
 
 interface IProps {
   children?: React.ReactNode;
 }
 interface IDecoderState {
-  vehicle: DecodedVehicle | undefined;
-  setVehicle: React.Dispatch<React.SetStateAction<DecodedVehicle | undefined>>;
+  vehicle: DecoderResults | undefined;
+  setVehicle: React.Dispatch<React.SetStateAction<DecoderResults | undefined>>;
   isDecoding: boolean;
   toggleDecoding: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -15,7 +15,7 @@ const DecoderContext = React.createContext<IDecoderState>({} as IDecoderState);
 export const useDecoderContext = () => React.useContext(DecoderContext);
 
 function DecoderContextProvider({children}: IProps) {
-  const [vehicle, setVehicle] = React.useState<DecodedVehicle | undefined>();
+  const [vehicle, setVehicle] = React.useState<DecoderResults | undefined>();
   const [isDecoding, toggleDecoding] = React.useState<boolean>(false);
 
   const state = React.useMemo<IDecoderState>(

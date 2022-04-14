@@ -146,7 +146,7 @@ const ATTRIBUTE_MAP = Object.freeze({
   non_land_use: 195,
 });
 
-class DecodedVehicle {
+class DecoderResults {
   private static attributeMap = ATTRIBUTE_MAP;
   private vehicle: IDecoderResults | undefined;
   private attributes: IDecoderAttribute[];
@@ -193,4 +193,4 @@ class DecodedVehicle {
   }
 }
 
-export default DecodedVehicle;
+export default DecoderResults;

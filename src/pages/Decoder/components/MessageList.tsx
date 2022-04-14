@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import {useDecoderContext} from '../../../utils/providers/DecoderContextProvider';
-import DecodedVehicle from '../helpers/DecodedVehicle';
+import DecoderResults from '../helpers/DecoderResults';
 
 interface IProps {
   messages: string[];
@@ -9,7 +9,7 @@ interface IProps {
 
 function MessageList({messages = []}: IProps) {
   const {vehicle} = useDecoderContext();
-  const attributes = DecodedVehicle.getAttributeMap();
+  const attributes = DecoderResults.getAttributeMap();
   const pendingMessages = [];
 
   // explicit messages

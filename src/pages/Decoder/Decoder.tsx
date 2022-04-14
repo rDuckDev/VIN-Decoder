@@ -7,7 +7,7 @@ import DecoderBodyClassImage from './components/DecoderBodyClassImage';
 import DecoderTable from './components/DecoderTable';
 import MessageList from './components/MessageList';
 import VinInputGroup from './components/VinInputGroup';
-import DecodedVehicle from './helpers/DecodedVehicle';
+import DecoderResults from './helpers/DecoderResults';
 
 function Decoder() {
   const {vin} = useVinContext();
@@ -39,7 +39,7 @@ function Decoder() {
         }
 
         setMessages([data.Message]);
-        setVehicle(new DecodedVehicle(data.Results));
+        setVehicle(new DecoderResults(data.Results));
       })
       .catch((error) => {
         setMessages([error.message]);
